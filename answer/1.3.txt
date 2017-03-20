@@ -1,0 +1,66 @@
+#include "stdio.h"
+#include "stdlib.h"
+#include "time.h"
+#include "iostream"
+using namespace std;
+
+void DecToInt(float dec);
+void outputNum(int num);
+int printdigit(int a)
+{
+
+	return a;
+}
+void outputdot(float b);
+int main(void)
+{
+	int intNum = rand();
+	int i_exp = rand();
+	int j_rand = rand() % 4;
+	float Num = intNum*(-1) ^ i_exp;
+	Num = Num / (10 ^ j_rand);
+	Num = 2345.45;
+	std::cout << "原始数据:" << Num << ";" << std::endl;
+	DecToInt(Num);
+	//std::cout <<"输出数据：" << outputNum(Num)<<std::endl;
+	system("pause");
+	return 0;
+}
+void DecToInt(float dec)
+{
+	int dec_temp1 = dec;
+	float dec1 = dec;
+	int dot_int;
+	int i_cnt;
+	if ((dec_temp1 - dec1) == 0)outputNum(dec_temp1);
+	else
+	{
+		int num_temp = dec1;
+		int i = 1;
+		while (1)
+		{
+			dec1 = dec1 * 10;
+			num_temp = dec1;
+			if ((num_temp - dec1) == 0) 
+			{
+				i_cnt = i; 
+				cout << i_cnt << endl;
+				break;
+			}
+			i++;
+		}
+		dot_int =(dec - dec_temp1 ) * (pow(10,i_cnt));
+		outputNum(dec_temp1);
+		//cout << "10^i_cnt=" << (10 ^ i_cnt);
+		//std::cout << "dec_temp1=" << dec_temp1 << std::endl;;
+		std::cout << ".";
+		outputNum(dot_int);
+	}
+}
+void outputNum(int num)
+{
+	if (num < 0)num = -num;
+	if (num >= 10)
+		outputNum(num / 10);
+	cout<<printdigit(num % 10);
+}

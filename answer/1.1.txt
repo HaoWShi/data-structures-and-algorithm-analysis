@@ -1,0 +1,35 @@
+#include "stdio.h"
+#include "stdlib.h"
+#include "time.h"
+#include "iostream"
+
+int main(void)
+{
+	const int cnt_const = 20;
+	double times[cnt_const];
+	//int cnt = cnt_const;
+	clock_t time_Start, time_Finsh;
+	double time_Duration;
+	int Nums[cnt_const];
+	for (int i = 0; i < cnt_const;i++)
+	{
+		int N = rand();
+		Nums[i] = N;
+		time_Start = clock();
+		for (int j = 0; j < 100000000; j++)
+		{
+			N = Nums[i] / 2;
+			//std::cout << i << std::endl;
+		}
+		time_Finsh = clock();
+		time_Duration = time_Finsh - time_Start;
+		times[i] = time_Duration;
+
+	}
+	for (int i = 0; i < cnt_const; i++)
+	{
+		std::cout << "整数" << Nums[i] << ";除以2花费的时间为" << times[i] << std::endl;
+	}
+	system("pause");
+	return 0;
+}
