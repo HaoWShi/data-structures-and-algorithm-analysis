@@ -1,0 +1,114 @@
+#include "stdio.h"
+#include "stdlib.h"
+#include "time.h"
+#include "iostream"
+using namespace std;
+void Swap1(int &A, int&B);
+void Founction1(int (&A)[10]);
+void Founction2(int (&A)[10]);
+void Founction3(int (&A)[10]);
+//void Swap1(int *A, int *B);
+int main()
+{
+	int g_Icnt=2;
+	cout << "请输入数组的大小n；" << endl;
+	cin >> g_Icnt;
+	//const int const g_CLcnt = g_Icnt;
+	int g_Iarray1[10] = { 0 };
+	int g_Iarray2[10] = { 0 };
+	int g_Iarray3[10] = { 0 };
+	/*for (int i = 0; i < 10; i++)
+	{
+		g_Iarray[i] = rand() % 9;
+		cout << g_Iarray[i] << ",";
+	}*/
+	Founction1(g_Iarray1);
+	Founction2(g_Iarray2);
+	Founction3(g_Iarray3);
+	system("pause");
+	return 0;
+
+}
+
+void Founction1(int(&A)[10])
+{
+	clock_t start_time, end_time;
+	start_time = clock();
+	srand((unsigned int)(time(NULL)));
+	A[0] = rand() % 10;
+	for (int i = 1;;)
+	{
+		if (i == 10)break;
+		srand((unsigned int)(time(NULL)));
+		A[i] = rand()%10;
+		for (int j = 0; ; j++)
+		{
+			if (A[i] == A[j]) {
+				//cout << "1";
+					break;
+			}
+			if (j == (i - 1))
+			{
+				i++; break;
+				//cout << "j=" << j << "," << "i=" << i << endl;
+			}
+		}
+	}
+	end_time = clock();
+	//cout << "随机数组为：";
+	//for (int i = 0; i < 10; i++)
+	//	cout << A[i] << ",";
+	//cout << endl;
+	cout << "算法1的运行时间*100000=" << end_time - start_time << endl;
+}
+void Founction2(int(&A)[10])
+{
+	clock_t start_time, end_time;
+	start_time = clock();
+
+	int g_Iused[10];
+	for (int i = 0;i<10;)
+	{
+
+		if (i == 10)break;
+		srand((unsigned int)(time(NULL)));
+		A[i] = rand() % 10;
+		if (g_Iused[A[i]] == 1)continue;
+		else
+		{
+			g_Iused[A[i]] = 1;
+			i++;
+		}
+	}
+	end_time = clock();
+	//cout << "随机数组为：";
+	//for (int i = 0; i < 10; i++)
+		//cout  << A[i] << ",";
+	//cout << endl;
+	cout << "算法2的运行时间*1000=" << end_time - start_time << endl;
+}
+void Founction3(int(&A)[10])
+{
+	clock_t start_time, end_time;
+	start_time = clock();
+	//srand((unsigned int)(time(NULL)));
+	for (int i = 0; i < 10; i++)
+		A[i] = i;
+	for (int i = 0; i < 10; i++)
+	{
+		int temp= rand() % 9;
+		Swap1(A[i], A[temp]);
+	}
+	end_time = clock();
+	//cout << "随机数组为：";
+	//for (int i = 0; i < 10; i++)
+	//	cout  << A[i] << ",";
+	//cout << endl;
+	cout << "算法3的运行时间*10000000=" << end_time - start_time << endl;
+}
+void Swap1(int &A, int&B)
+{
+	int temp = A;
+	A = B;
+	B = temp;
+}
